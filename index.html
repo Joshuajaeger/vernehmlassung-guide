@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vernehmlassung MVP — Technical Architecture</title>
 <meta name="description" content="Technical documentation for the Interpharma Vernehmlassung analysis pipeline: ingest, OCR, similarity scoring, analysis.json, dashboard.">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="guide-build" content="2026-08-02-tech-v3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@600&display=swap" rel="stylesheet">
 <style>
@@ -372,21 +375,15 @@ python3 pipeline/serve.py   <span class="c"># → http://127.0.0.1:8765/new</spa
         <tbody>
           <tr>
             <td><code>hf</code></td>
-            <td><code>HF_TOKEN</code> / <code>HF_LOCAL=1</code> / auto</td>
-            <td class="de">Embedding-Similarity (BGE / MiniLM)</td>
-            <td class="en">Embedding similarity (BGE / MiniLM)</td>
+            <td><code>HF_LOCAL=1</code> / <code>HF_TOKEN</code></td>
+            <td class="de">Embedding-Similarity (MiniLM / BGE)</td>
+            <td class="en">Embedding similarity (MiniLM / BGE)</td>
           </tr>
           <tr>
             <td><code>heuristic</code></td>
             <td><code>SEMANTIC_FORCE=heuristic</code></td>
             <td class="de">Keyword-Fenster + Polaritätslexikon</td>
             <td class="en">Keyword windows + polarity lexicon</td>
-          </tr>
-          <tr>
-            <td><code>llm</code></td>
-            <td><code>SEMANTIC_FORCE=llm</code> + OpenAI/Anthropic</td>
-            <td class="de">Optionaler Zweitpfad für Stance-JSON</td>
-            <td class="en">Optional secondary path for stance JSON</td>
           </tr>
         </tbody>
       </table>
@@ -480,15 +477,17 @@ python3 pipeline/validate.py --check-dashboard</pre>
       <table class="schema">
         <thead><tr><th>Env</th><th class="de">Zweck</th><th class="en">Purpose</th></tr></thead>
         <tbody>
-          <tr><td><code>HF_TOKEN</code></td><td class="de">HF Inference für Embeddings</td><td class="en">HF Inference for embeddings</td></tr>
-          <tr><td><code>HF_SIM_MODEL</code></td><td class="de">Default <code>BAAI/bge-m3</code></td><td class="en">Default <code>BAAI/bge-m3</code></td></tr>
-          <tr><td><code>HF_LOCAL</code></td><td class="de"><code>1</code> = sentence-transformers lokal</td><td class="en"><code>1</code> = local sentence-transformers</td></tr>
-          <tr><td><code>SEMANTIC_FORCE</code></td><td class="de"><code>hf</code> | <code>heuristic</code> | <code>llm</code></td><td class="en"><code>hf</code> | <code>heuristic</code> | <code>llm</code></td></tr>
-          <tr><td><code>BRAVE_API_KEY</code></td><td class="de">optional Web-Discovery</td><td class="en">optional web discovery</td></tr>
-          <tr><td><code>OPENAI_API_KEY</code> / <code>ANTHROPIC_API_KEY</code></td><td class="de">optional LLM-Stance</td><td class="en">optional LLM stance</td></tr>
+          <tr><td><code>HF_LOCAL</code></td><td class="de">Default <code>1</code> — lokale Multilingual-Embeddings</td><td class="en">Default <code>1</code> — local multilingual embeddings</td></tr>
+          <tr><td><code>HF_SIM_MODEL</code></td><td class="de">z.B. MiniLM lokal / <code>BAAI/bge-m3</code> cloud</td><td class="en">e.g. MiniLM local / <code>BAAI/bge-m3</code> cloud</td></tr>
+          <tr><td><code>HF_TOKEN</code></td><td class="de">Hugging Face Inference (cloud)</td><td class="en">Hugging Face Inference (cloud)</td></tr>
+          <tr><td><code>OCR_LANG</code></td><td class="de">Default <code>deu+eng</code></td><td class="en">Default <code>deu+eng</code></td></tr>
+          <tr><td><code>BRAVE_API_KEY</code></td><td class="de">Web-Discovery</td><td class="en">Web discovery</td></tr>
+          <tr><td><code>HOST</code> / <code>PORT</code></td><td class="de">Server-Bind (Deploy: <code>0.0.0.0:8765</code>)</td><td class="en">Server bind (deploy: <code>0.0.0.0:8765</code>)</td></tr>
         </tbody>
       </table>
     </section>
+
+    <!-- guide-build 2026-08-02-tech-v3: no limits section -->
 
     <footer>
       <span class="de">Öffentliche technische Doku · Produktcode privat (<code>Joshuajaeger/vernehmlassung-mvp</code>)</span>
