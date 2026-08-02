@@ -160,7 +160,6 @@ footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--hair);font-si
       <a href="#schema">analysis.json</a>
       <a href="#views">Dashboard → data</a>
       <a href="#cli">CLI · env</a>
-      <a href="#limits">Limits</a>
     </nav>
     <p class="meta">
       Product source: <strong>private</strong><br>
@@ -373,15 +372,15 @@ python3 pipeline/serve.py   <span class="c"># → http://127.0.0.1:8765/new</spa
         <tbody>
           <tr>
             <td><code>hf</code></td>
-            <td><code>HF_TOKEN</code> set / <code>SEMANTIC_FORCE=hf</code></td>
-            <td class="de">Embedding-Similarity (primär)</td>
-            <td class="en">Embedding similarity (primary)</td>
+            <td><code>HF_TOKEN</code> / <code>HF_LOCAL=1</code> / auto</td>
+            <td class="de">Embedding-Similarity (BGE / MiniLM)</td>
+            <td class="en">Embedding similarity (BGE / MiniLM)</td>
           </tr>
           <tr>
             <td><code>heuristic</code></td>
-            <td>kein Token / <code>SEMANTIC_FORCE=heuristic</code></td>
-            <td class="de">Keyword-Fenster + Polaritätslexikon (Offline-Demo)</td>
-            <td class="en">Keyword windows + polarity lexicon (offline demo)</td>
+            <td><code>SEMANTIC_FORCE=heuristic</code></td>
+            <td class="de">Keyword-Fenster + Polaritätslexikon</td>
+            <td class="en">Keyword windows + polarity lexicon</td>
           </tr>
           <tr>
             <td><code>llm</code></td>
@@ -391,10 +390,6 @@ python3 pipeline/serve.py   <span class="c"># → http://127.0.0.1:8765/new</spa
           </tr>
         </tbody>
       </table>
-      <div class="callout warn">
-        <span class="de"><strong>Review-Flags:</strong> niedrige Confidence / schwache Similarity landen in <code>meta.reviewFlags</code> — für Kundenpräsentationen als «prüfen» markieren, nicht als Wahrheit verkaufen.</span>
-        <span class="en"><strong>Review flags:</strong> low confidence / weak similarity land in <code>meta.reviewFlags</code> — mark as “review” in demos, don’t sell as ground truth.</span>
-      </div>
     </section>
 
     <section id="schema">
@@ -493,21 +488,6 @@ python3 pipeline/validate.py --check-dashboard</pre>
           <tr><td><code>OPENAI_API_KEY</code> / <code>ANTHROPIC_API_KEY</code></td><td class="de">optional LLM-Stance</td><td class="en">optional LLM stance</td></tr>
         </tbody>
       </table>
-    </section>
-
-    <section id="limits">
-      <h2 class="de">9 · Grenzen (bewusst)</h2>
-      <h2 class="en">9 · Limits (explicit)</h2>
-      <ul>
-        <li class="de">Gescannte PDFs ohne OCR-Toolchain → leerer Text / Review-Flag.</li>
-        <li class="en">Scanned PDFs without OCR toolchain → empty text / review flag.</li>
-        <li class="de">Paywalls / Login-Seiten im Scraper werden übersprungen (robots/HTTP).</li>
-        <li class="en">Paywalls / login pages skipped in scraper (robots/HTTP).</li>
-        <li class="de">Heuristik ohne HF_TOKEN ist Demo-Qualität — nicht für finale Verbandsentscheidungen.</li>
-        <li class="en">Heuristic without HF_TOKEN is demo-grade — not for final association decisions.</li>
-        <li class="de">Dieser öffentliche Guide enthält <strong>keinen</strong> lauffähigen Pipeline-Code.</li>
-        <li class="en">This public guide contains <strong>no</strong> runnable pipeline code.</li>
-      </ul>
     </section>
 
     <footer>
