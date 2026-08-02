@@ -1,20 +1,19 @@
-# Interpharma — Vernehmlassungsauswertung Guide
+# Vernehmlassung MVP — Technical Guide
 
-Public interactive HTML guide ([GitHub Pages](https://joshuajaeger.github.io/vernehmlassung-guide/)) for the Vernehmlassung analysis MVP.
+Public **technical architecture** docs for the Interpharma Vernehmlassung analysis pipeline.
 
-**Product source is private** (`Joshuajaeger/vernehmlassung-mvp`, access-controlled). This repo only ships the walkthrough — no pipeline code.
+Live: https://joshuajaeger.github.io/vernehmlassung-guide/
 
-## What the guide covers
+This is **not** a non-functional dashboard lookalike. It documents:
 
-1. **Input first** — paste text and/or upload PDF/TXT (not Fedlex-first)
-2. **Parse / OCR** — digital text layer, then OCR for scans
-3. **Automatic chain** — Massnahmen inference → optional Fedlex/web → HF similarity → dashboard
-4. **Analysis views** — Überblick, Zustimmung × Impact, Meinungsfreunde, Absender-Matrix
+- Runtime architecture and `pipeline/` modules
+- Input-first path (text / PDF → OCR → automatic chain)
+- Similarity-first scoring (`BAAI/bge-m3`, heuristic, optional LLM)
+- `analysis.json` data contract and how dashboard views map to fields
+- CLI and environment variables
 
-## Live
-
-https://joshuajaeger.github.io/vernehmlassung-guide/
+**Product source is private:** `Joshuajaeger/vernehmlassung-mvp` (access-controlled). This repo ships only the HTML reference — no pipeline code.
 
 ## Local
 
-Open `index.html` in a browser (no build step).
+Open `index.html` in a browser (no build). GitHub Pages serves from `main` / root.
